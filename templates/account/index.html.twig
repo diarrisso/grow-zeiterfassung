@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container  Acount">
+    <div class="row justify-content-center align-items-center">
+   {# <table class="table  ">#}
+      {#  <table class="table table-striped table-dark">#}
+        <div class="table-responsive">
+            <table class="table table-bordered table-dark">
+        <thead>
+        <tr>
+            <th scope="col">datum</th>
+            <th scope="col">Aufgaben</th>
+            <th scope="col"> kommentar</th>
+            <th scope="col">Zeite</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ertragen in trackingResult %}
+        <tr class="table-active">
+            <th scope="row">{{ ertragen.created_at|date("d-m-Y") }}</th>
+            <td> {{ ertragen.Aulgaben}}</td>
+            <td> {{ ertragen.internal_commentary }}</td>
+            <td> <h6 class="text-black">{{ertragen.Zeiten|date('H:i')}}</h6></td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+        </div>
+    </div>
+    </div>
+{% endblock %}

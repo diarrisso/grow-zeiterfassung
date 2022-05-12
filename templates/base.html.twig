@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Grow Zeiterfassung{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ asset('images/logo.svg') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/simple-datatables.css') }}"/>
+    <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+    {% block  stylesheets  %}   {% endblock %}
+    <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
+    <script type="text/javascript" src=" {{ asset('js/simple-datatables.js') }}" defer></script>
+    <script src="{{ asset('/js/main.js') }}" defer></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer> </script>
+</head>
+<div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary {{ app.session.flashBag.peek('success')|length > 0 ? '': 'mb-5'}}">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ path('app_home') }}">
+                <img src="{{ asset('images/logo.svg') }}" alt="" width="30" height="24" class="d-inline-block align-text-top"> grow Zeiterfassung</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav ml-auto">
+                        {% if app.user %}
+                        {% if is_granted('ROLE_USER') %}
+                            <li class="nav-item" ><a class="nav-link" href="{{ path('frontend.tracking.index') }}"> Neue Eintrage</a></li>
+                        {% endif %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin') }}">Admin</a>
+                            </li>
+                                {% endif %}
+                        {% if is_granted('ROLE_USER') %}
+                            <li class="nav-item" >
+                                   <a class="nav-link" href="{{ path('account.user.ertrage') }}">Zeit </a>
+                            </li>
+                        {% endif %}
+                            <li class="nav-item" ><a class="nav-link" href="{{ path('app_logout') }}"> Abmelden</a></li>
+                        {% else  %}
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('app_login')}}">Login</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('app_register')}}">Ameldung</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</div>
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+
+
+{% endfor %}
+<body>
+{% block body %}
+    <div class="container"></div>
+{% endblock %}
+<footer> <p>  2022 Copyright <a href="https://grow-werbeagentur.de">grow werbeagentur GmbH</a> </p></footer>
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
+
+</body>
+</html>
+

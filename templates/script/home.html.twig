@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% if alltrac %}
+    <div class="container">
+        <div class="col-6 mt-5">
+            {% include 'script/_filter.html.twig' with {form : form} only %}
+        </div>
+        <table class="table table-hover mt-5">
+            <thead>
+            <tr class="table-primary  text-white"  >
+                <th scope="col">Mitarbeiter</th>
+                <th scope="col">Projkte</th>
+                <th scope="col">Projekte Beschreibung</th>
+                <th scope="col">Aufgaben</th>
+                <th scope="col">Kommentare</th>
+                <th scope="col">Anfange Zeit</th>
+                <th scope="col">Ende Zeit</th>
+                <th class="summe" scope="col">Gesamt Zeite</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for tes in alltrac %}
+              {% include 'script/_zeit.html.twig' with {tes : tes} only %}
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation">{{ knp_pagination_render(alltrac) }}</div>
+    {% else %}
+        <p>Aucun articles</p>
+        {% endif %}
+    </div>
+{% endblock %}
+

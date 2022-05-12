@@ -1,0 +1,16 @@
+# config/packages/twig.yaml
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    debug: true
+    strict_variables: '%kernel.debug%'
+    form_themes: [ 'bootstrap_4_layout.html.twig' ] # accepte plusieurs thèmes
+    
+
+#when@tests:
+#    twig:
+#        strict_variables: true,
+        
+        
+
+
+

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <div class="row justify-content-center align-items-center">
+
+
+        <div class="col-7  col-6  col-lg-4 mx-auto">
+            <h2 class="mx-auto    tracking-h1">  Guten Morgen {{ app.user.vorname}}  </h2>
+
+
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            <div class="row">
+                <div class="col-6 time">
+                    {{ form_row(form.start) }}
+
+                </div>
+
+                <div class="col-6 time">
+                    {{ form_row(form.end) }}
+
+                </div>
+            </div>
+
+            {{ form_row(form.internalCommentary, {'label': 'Kommentare' }) }}
+            {{ form_row(form.task) }}
+            {{ form_row(form.project) }}
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+
+    <table class="table table-hover">
+
+        <thead>
+        <tr>
+            <th scope="col">datum</th>
+            <th scope="col">Zeiten</th>
+            <th scope="col"> kommentar</th>
+            <th scope="col">Aufgaben</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tes in test %}
+
+
+        <tr class="table-active">
+            <th scope="row"><a href="{{ path('frontend.tracking.index') }}">{{ tes.createdAt.format('d-m-Y') }}</a></th>
+            <td>{{tes.end.format('H:i') }}</td>
+            <td> {{ tes.internalCommentary }}</td>
+
+            <td> {#  }{ tes.task}#}</td>
+
+        </tr>
+
+        </tbody>
+        {% endfor %}
+
+    </table>
+    </div>
+{% endblock %}
+

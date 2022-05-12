@@ -1,0 +1,12 @@
+
+{{ form_start(form, {attr: {class: 'filter js-filter-form'}}) }}
+{{ form_row(form.q) }}
+    <div class="row">
+        <div class="col-md-4">{{ form_row(form.project) }}</div>
+        <div class="col-md-4">{{ form_row(form.tasks) }}</div>
+        <div class="col-md-4">{{ form_row(form.user) }}</div>
+       <div class="col-md-4">{{ form_row(form.minDate) }}</div>
+       <div class="col-md-4">{{ form_row(form.maxDate) }}</div>
+    </div>
+    <button type="submit" class="btn btn-success w-50"> Suchen </button>
+{{ form_end(form) }}

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <table class="table table-hover mt-5">
+            <thead>
+            <tr class="table-primary  text-white"  >
+                <th scope="col">Mitarbeiter</th>
+                <th scope="col">Aufgaben</th>
+                <th scope="col">GesamtZeite</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for tasks in taskHour %}
+
+                <tr>
+                    <td> {{ tasks.nachname}}</td>
+                    <td> {{ tasks.name}}</td>
+                    <td> {{ tasks.GesamtStunden|date('H:i')}}</td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

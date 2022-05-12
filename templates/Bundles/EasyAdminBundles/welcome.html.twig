@@ -1,0 +1,69 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title 'Übersicht über alle Erträgen' %}
+{% block main %}
+    {#{<div class="container">
+        {{ form_start(form) }}
+        <div class="form-row align-items-end" >
+            <div class="col">
+                {{ form_row(form.nom) }}
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Rechercher</button>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}#}
+    <table id="datatable" class="table table-hover">
+        <thead>
+        <tr class="table-primary  text-white"  >
+            <th scope="col">Mitarbeiter</th>
+            <th scope="col">projekte</th>
+            <th scope="col">Aufgaben</th>
+            <th scope="col">Aufgaben Beschreibung</th>
+            <th scope="col">Kommentare</th>
+            <th scope="col">Anfangszeit</th>
+            <th scope="col">Endezeit</th>
+            <th scope="col">Gesamtzeit</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for tes in myJSON %}
+
+            <tr>
+                <td> {{ tes.nachname}}</td>
+                <td> {{ tes.projectName}}</td>
+                <td> {{ tes.name}}</td>
+                <td> {{ tes.description}}</td>
+                <td> {{ tes.internalCommentary}}</td>
+                <td> {{ tes.start|date('H:i')}}</td>
+                <td> {{ tes.end|date('H:i')}}</td>
+                <td> {{ tes.total|date('%H:%M')}}</td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <script  type="javascript">
+        const element = document.getElementById('datatable');
+        if(typeof(element) !== undefined && element != null){
+            const datatable = new simpleDatatables.DataTable('#datatable', {
+                searchable: true,
+                perPage: 14,
+                perPageSelect: [25, 50, 75, 100]
+            });
+            datatable.on(datatable.init, function() {
+                new SlimSelect({
+                    select: dataTable-selector,
+                    showSearch: true
+                });
+            });
+        }
+    </script>
+{% endblock %}
