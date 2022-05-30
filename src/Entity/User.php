@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
 
@@ -28,6 +29,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * * @Assert\Regex(
+     *     pattern="/\grow-werbeagentur/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
      */
     private $email;
 
@@ -70,7 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $createdAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Role::class, inversedBy="users")
+     * @ORM\Column(type="json")
      */
     private $role;
 
@@ -137,15 +143,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function getRoles():? array
+   /* public function getRoles():? array
     {
         $roles = $this->roles;
 
-        /*foreach ($userRoles as $userRole) {
+        foreach ($userRoles as $userRole) {
             $roles[] = $userRole->getRoleName();
-        }*/
+        }
         // guarantee every user at least has ROLE_USER
-        $roles[]= 'ROLE_USER';
+        /*$roles[]= 'ROLE_USER';
+
+        return array_unique($roles);
+    }*/
+
+    public function getRoles():? array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
@@ -169,10 +184,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPassword(string $password): void
     {
-        if(!preg_match("/[$*%]/", $password)) throw new \ exception('das Passwort muss eine spezielle Zeichenkette haben ');
-        $this->password = $password;
+        if(!preg_match("/[$*%]/", $password)) {
+            throw new \ exception('das Passwort muss eine spezielle Zeichenkette haben ');
 
-        //return $this;
+       } else {
+            $this->password = $password;
+        }
     }
 
     /**
