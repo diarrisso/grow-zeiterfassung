@@ -9,7 +9,8 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use function dd;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
 
@@ -26,16 +27,16 @@ class Tracking
 
     /**
      * @ORM\Column(type="time")
+     * * @Assert\NotBlank
      * @var DateTime
      */
     private $start;
 
     /**
      * @ORM\Column(type="time")
-      @var DateTime
+     * @var DateTime
      */
     private  $end;
-
 
 /**
 * @ORM\Column(type="datetime", nullable=true)
@@ -43,11 +44,14 @@ class Tracking
     private  $sum;
 
 
-
-
-
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * * @Assert\Length(
+     *      min = 15,
+     *      max = 50,
+     *      minMessage = "Ihr Kommentar muss mindestens 15 Zeichen lang sein",
+     *      maxMessage = "Ihr Vorname darf nicht länger sein als 50 Zeichen"
+     * )
      */
     private ?string $internalCommentary = null;
 
@@ -87,13 +91,8 @@ class Tracking
     public function __construct()
     {
         $this->createdAt= new \DateTimeImmutable();
-        /*$this->start= new \DateTime();
-        $this->end= new \DateTime();*/
-
-
 
     }
-
 
     public function  __toString()
     {
@@ -127,10 +126,8 @@ class Tracking
     public function setEnd(\DateTimeInterface $end): self
     {
         $this->end = $end;
-
         return $this;
     }
-
 
     /**
      * @return string|null

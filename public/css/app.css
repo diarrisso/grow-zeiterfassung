@@ -35,6 +35,14 @@ tr:nth-of-type(odd) {
         width: 200px;
     }
 }
+
+@media (max-width:480px) {
+    .form-inline {
+
+        flex-flow: row;
+
+    }
+}
 @media only screen and  (max-width :1024px)
 {
     textarea.form-control {

@@ -16,14 +16,12 @@ use function dd;
 class AccountController extends AbstractController
 {
     /**
-     * @Route("/account/index", name="account.user.ertrage")
-     *
+     * @Route("/profile", name="account.user.ertrage")
      * @IsGranted("ROLE_USER")
      * @return Response
      */
     public function index(TrackingRepository $trackingRepository ): Response
     {
-        $test = $trackingRepository->findByUsersAndDate($this->getUser());
         $trackingResult = $trackingRepository->findAllTracTasks($this->getUser());
         return $this->render('/account/index.html.twig', compact('trackingResult'));
     }

@@ -67,29 +67,8 @@ class SearchForm extends AbstractType
                 'widget' => 'single_text',
                 // this is actually the default format for single_text
                 'format' => 'yyyy-MM-dd',
-            ])
-
-
-
-
-
-
-
-
-         /*   ->add('minDate',DateTimeType::class, [
-                'widget' => 'single_text',
-                'html5' => false,
-            ])
-            ->add('maxDate',DateTimeType::class, [
-                // this is actually the default format for single_text
-                'widget' => 'single_text',
-                'placeholder' => 'Select a value',
-                'html5'=> false,
-
-            ])*/
-        ;
+            ]);
     }
-
 
     public function configureOptions(OptionsResolver $resolver)
     {
